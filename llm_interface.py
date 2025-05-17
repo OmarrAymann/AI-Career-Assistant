@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 API_URL = "https://api-inference.huggingface.co/models/mistralai/Mixtral-8x7B-Instruct-v0.1"
-API_TOKEN = os.getenv("HF_API_KEY")
+API_TOKEN = "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"
 
 headers = {
     "Authorization": f"Bearer {API_TOKEN}",
