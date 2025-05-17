@@ -1,0 +1,9 @@
+Dear Hiring Manager,
+
+I am excited to submit my application for the Enter your Job title : role. With a foundation in my background in AI and related technologies and proven strengths in Arabic, C++, CISCO CCNA,
+I bring a blend of technical knowledge and collaborative spirit that aligns well with your team’s mission.
+Your organization’s focus on innovation and excellence—especially in areas like OpenCV, IfcOpenShell, Git—resonates deeply with my professional values. I am confident that my background will allow me to contribute meaningfully from day one.
+Thank you for your consideration.I look forward to the opportunity to grow and contribute with your team.
+
+Sincerely,
+Enter your name :
