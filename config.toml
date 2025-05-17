@@ -1,0 +1,14 @@
+[server]
+headless = true
+enableCORS = false
+enableXsrfProtection = false
+
+[theme]
+base = "light"
+
+[client]
+showErrorDetails = true
+
+[runner]
+# Ensures Python sees the root dir where 'agents' exists
+magicEnabled = true
