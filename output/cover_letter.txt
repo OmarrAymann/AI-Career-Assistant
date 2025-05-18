@@ -1,11 +1,11 @@
 Dear Hiring Manager,
 
-It is with great enthusiasm that I apply for the Machine learning engineer position.
-My background in my background in AI and related technologies and practical experience in AMG8833 thermal sensor, Arabic (Native), C++ (oop) equip me with the tools to thrive in a fast-paced, evolving environment.
-I’m especially inspired by your use of PyTorch, TensorFlow, JAX, LoRA, adapters and believe that your company’s vision perfectly complements my skills and career ambitions.
-I am ready to bring value and grow within your innovative team.
+I’m thrilled to express my interest in the sad role.
+My background in problem-solving and hands-on experience with AMG8833 thermal sensor, Arabic (Native), C++ (oop) make me confident in my ability to learn fast and contribute meaningfully.
+While I bring a strong foundation,I’m equally driven by the opportunity to grow.
+I’m especially excited by the chance to work with technologies like Python, C++, Git, JIRA, Agile methodologies, Langchain, TensorFlow, PyTorch, Keras, and I’m confident I can bring value to your team from day one.
 
 Thank you for considering my application.
 
-Warm regards,
-Omar Ayman
+Sincerely,
+aas

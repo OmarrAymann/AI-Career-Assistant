@@ -1,4 +1,3 @@
-# ------------------------ Imports ------------------------
 import streamlit as st
 import os
 import fitz  # PyMuPDF
@@ -6,21 +5,18 @@ import re
 import json
 import sys
 from streamlit_echarts import st_echarts
-
 from llm_interface import ask_llm
 from agents.job_parser import JobParserAgent
 from agents.resume_matcher import MatchAgent
 from agents.cover_letter_writer import CoverLetterAgent
-
 # ------------------------ Page Config ------------------------
 st.set_page_config(page_title="AI Career Assistant", layout="centered")
-
 # ------------------------ CSS Styles ------------------------
 st.markdown(
     """
     <style>
     .stApp {
-        background-color: #f4f4f4;
+        background-color: #e7e0ff;
         color: #212121;
         font-family: 'Segoe UI', sans-serif;
         font-size: 16px;
@@ -43,6 +39,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 # ------------------------ Functions ------------------------
 def extract_text_from_pdf(uploaded_file):
     doc = fitz.open(stream=uploaded_file.read(), filetype="pdf")
@@ -100,7 +97,6 @@ Job Description:
         print(f"Skill extraction failed: {e}")
         st.warning("⚠️ Skill extraction failed. Please enter your skills manually. Example: Python, SQL, Docker")
         return []
-
 # ------------------------ UI ------------------------
 st.title("🤖 AI Career Assistant")
 st.markdown(
@@ -115,7 +111,33 @@ st.markdown(
 st.write("this tool helps you see how your skills match a job and create a cover letter that speaks for you")
 st.write("let's get started! 🚀")
 
-st.header("Step 1: Provide Your Skills")
+# ------------------------ Hugging Face Token Input ------------------------
+st.header("Step 1: Enter Your Hugging Face Token")
+st.markdown(
+    """
+    <p style='text-align: center; font-size: 18px;'>
+        To use this app, you need a Hugging Face API token. 
+        If you don't have one, please create an account on <a href="https://huggingface.co/join" target="_blank">Hugging Face</a>.
+    </p>
+    """,
+    unsafe_allow_html=True
+)
+
+token_input = st.text_input(
+    "Please enter your Hugging Face token (used only for this session):",
+    type="password",
+    help="You can find your token at https://huggingface.co/settings/tokens"
+)
+
+if token_input:
+    os.environ["HUGGINGFACEHUB_API_TOKEN"] = token_input
+    st.success("✅ Token has been set for this session.")
+    st.markdown("📺 [Watch Tutorial](https://www.youtube.com/watch?v=uBSbgQ1qPHI)", unsafe_allow_html=True)
+else:
+    st.info("🔑 Your Hugging Face API token is required for the app to work correctly.")
+    st.stop()
+# ------------------------ Step 1: Resume ------------------------
+st.header("Step 2: Provide Your Skills")
 resume_file = st.file_uploader("📄 Upload your resume (PDF)", type=["pdf"])
 manual_skills = st.text_area("Or type your skills (comma-separated)", placeholder="E.g., Python, SQL, Docker, Java,etc...")
 
@@ -137,11 +159,11 @@ else:
     st.info("📌 Tip: You can upload a PDF resume or enter your skills manually.")
 
 # ------------------------ Step 2: Job Info ------------------------
-st.header("Step 2: Paste the Job Description")
+st.header("Step 3: Paste the Job Description")
 job_description = st.text_area("📄 Job Description", height=250, placeholder="Paste the full job description here...")
 
 # ------------------------ Step 3: Personal Info ------------------------
-st.header("Step 3: Personal info")
+st.header("Step 4: Personal info")
 user_name = st.text_input("📝 Your Name", value="")
 position_title = st.text_input("🎯 Job Title", value="")
 #cover_tone = st.selectbox("✍️ Tone of the Cover Letter", ["Professional", "Friendly", "Confident", "Humble"], index=0)
@@ -177,7 +199,6 @@ if st.button("Generate Match Score & Cover Letter"):
 
 # ---------------- Match Gauge ----------------
                 st.subheader("🧠 Job Match Overview")
-
                 gauge_options = {
     "series": [{
         "type": "gauge",
