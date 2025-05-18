@@ -20,7 +20,7 @@ st.markdown(
     """
     <style>
     .stApp {
-        background-color: #ffffff;
+        background-color: #f4f4f4;
         color: #212121;
         font-family: 'Segoe UI', sans-serif;
         font-size: 16px;
@@ -54,30 +54,35 @@ def extract_skills_from_text(text: str) -> list:
         return []
 
     prompt = f"""
-You are an AI resume parser.
+You are an AI assistant that extracts detailed skills and requirements from job descriptions.
 
-Extract **only** a JSON array of all relevant skills from this resume:
-- Programming languages
-- Frameworks, tools, platforms
-- Methodologies and certifications
-- Soft skills, languages, and technical domains
+Your task is to extract **ONLY** a valid JSON array of strings that includes:
 
-Follow these rules:
-- Normalize names (e.g., JS → JavaScript)
-- Include versions (e.g., Python 3.10)
-- No duplicates
-- No markdown
-- No commentary
-- Output must ONLY be a valid JSON array of strings.
+- Programming languages (e.g., Python, JavaScript)
+- Tools and libraries (e.g., pandas, NumPy, matplotlib)
+- Machine learning frameworks (e.g., TensorFlow, Scikit-learn)
+- NLP techniques and tasks (e.g., entity recognition, text classification)
+- Soft skills and communication abilities (e.g., conveying technical concepts to non-technical audiences)
+- Any multi-word skills or requirements (e.g., model selection, feature engineering)
+- Specific phrases that refer to experience or qualifications (e.g., developing ML models in production)
 
-Resume text:
+Rules:
+- Do not include duplicates
+- No markdown or commentary
+- Normalize common abbreviations (e.g., ML → Machine Learning)
+- "Return only a JSON array of strings. Do not include any explanation, markdown, or text outside the array. Here is the job description: ..."
+
+
+Job Description:
 \"\"\"{text}\"\"\"
 """
+
     try:
-        raw_response = ask_llm(prompt).strip()
+        raw_response = ask_llm(prompt)
 
         # Extract only the JSON list using regex
-        match = re.search(r'\[.*?\]', raw_response, re.DOTALL)
+        match = re.search(r'(\[.*?\])', raw_response, re.DOTALL)
+
         if not match:
             raise ValueError("No JSON list found.")
 
@@ -137,8 +142,8 @@ job_description = st.text_area("📄 Job Description", height=250, placeholder="
 
 # ------------------------ Step 3: Personal Info ------------------------
 st.header("Step 3: Personal info")
-user_name = st.text_input("📝 Your Name", value="Enter your name :")
-position_title = st.text_input("🎯 Job Title", value="Enter your Job title :")
+user_name = st.text_input("📝 Your Name", value="")
+position_title = st.text_input("🎯 Job Title", value="")
 #cover_tone = st.selectbox("✍️ Tone of the Cover Letter", ["Professional", "Friendly", "Confident", "Humble"], index=0)
 
 # ------------------------ Step 4: Generate Insights ------------------------

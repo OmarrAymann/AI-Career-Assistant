@@ -1,9 +1,11 @@
 Dear Hiring Manager,
 
-I am excited to submit my application for the Enter your Job title : role. With a foundation in my background in AI and related technologies and proven strengths in Arabic, C++, CISCO CCNA,
-I bring a blend of technical knowledge and collaborative spirit that aligns well with your team’s mission.
-Your organization’s focus on innovation and excellence—especially in areas like OpenCV, IfcOpenShell, Git—resonates deeply with my professional values. I am confident that my background will allow me to contribute meaningfully from day one.
-Thank you for your consideration.I look forward to the opportunity to grow and contribute with your team.
+It is with great enthusiasm that I apply for the Machine learning engineer position.
+My background in my background in AI and related technologies and practical experience in AMG8833 thermal sensor, Arabic (Native), C++ (oop) equip me with the tools to thrive in a fast-paced, evolving environment.
+I’m especially inspired by your use of PyTorch, TensorFlow, JAX, LoRA, adapters and believe that your company’s vision perfectly complements my skills and career ambitions.
+I am ready to bring value and grow within your innovative team.
 
-Sincerely,
-Enter your name :
+Thank you for considering my application.
+
+Warm regards,
+Omar Ayman
