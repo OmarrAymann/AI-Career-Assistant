@@ -8,6 +8,11 @@ Let this be your AI buddy who handles the boring stuff:
 
 ## All you have to do is sit back and land that dream job.  
 
+- You can try the deployed AI Career Assistant app here:  
+👉 [AI Career Assistant on Streamlit](https://ai-career-assistant-f46zxnj2odffryrscbfaur.streamlit.app/)
+
+- Read more about the project on LinkedIn:  
+👉 [View LinkedIn Announcement](https://www.linkedin.com/posts/your-post-id)
 ---
 
 ## **Real-World Problem**  
