@@ -1,6 +1,6 @@
 import streamlit as st
 import os
-import fitz  # PyMuPDF
+import fitz
 import re
 import json
 import sys
