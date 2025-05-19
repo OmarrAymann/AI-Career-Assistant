@@ -140,7 +140,7 @@ if token_input:
     st.success("✅ Token has been set for this session.")
 
 else:
-    st.info("🔑 Your Hugging Face API token is required for the app to work correctly.")
+    st.info('🔑 **:black[Your Hugging Face API token is required for the app to work correctly.]**')
     st.stop()
 # ------------------------ Step 1: Resume ------------------------
 st.header("Step 2: Provide Your Skills")
@@ -170,8 +170,12 @@ job_description = st.text_area("📄 Job Description", height=250, placeholder="
 
 # ------------------------ Step 3: Personal Info ------------------------
 st.header("Step 4: Personal info")
-user_name = st.text_input("📝 Your Name", value="")
-position_title = st.text_input("🎯 Job Title", value="")
+st.markdown('<label style="color:black; font-weight:bold;">📝 Your Name</label>', unsafe_allow_html=True)
+user_name = st.text_input(label="", value="")
+
+st.markdown('<label style="color:black; font-weight:bold;">🎯 Job Title</label>', unsafe_allow_html=True)
+position_title = st.text_input(label="", value="")
+
 #cover_tone = st.selectbox("✍️ Tone of the Cover Letter", ["Professional", "Friendly", "Confident", "Humble"], index=0)
 
 # ------------------------ Step 4: Generate Insights ------------------------
