@@ -20,7 +20,7 @@ def ask_llm(prompt: str) -> str:
     payload = {
         "inputs": prompt,
         "parameters": {
-            "max_new_tokens": 500,      # Increased for meaningful output
+            "max_new_tokens": 512,      
             "do_sample": False
         }
     }
