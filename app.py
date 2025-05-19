@@ -9,6 +9,7 @@ from llm_interface import ask_llm
 from agents.job_parser import JobParserAgent
 from agents.resume_matcher import MatchAgent
 from agents.cover_letter_writer import CoverLetterAgent
+from typing import List
 # ------------------------ Page Config ------------------------
 st.set_page_config(page_title="AI Career Assistant", layout="centered")
 # ------------------------ CSS Styles ------------------------
@@ -16,45 +17,56 @@ st.markdown(
     """
     <style>
     .stApp {
-        background-color: #e7e0ff;
-        color: #212121;
+        background-color: #f0f9ff; 
+        color: #1a1a1a;   
         font-family: 'Segoe UI', sans-serif;
         font-size: 16px;
         line-height: 1.6;
         padding: 1rem;
     }
+
     .stButton>button {
-        background-color: #0066cc;
-        color: #fff;
-        padding: 10px 20px;
+        background-color: #0073e6;
+        color: white;
+        padding: 12px 24px;
         border: none;
-        border-radius: 6px;
+        border-radius: 8px;
         cursor: pointer;
         font-size: 16px;
+        font-weight: bold;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); 
     }
+
     .stButton>button:hover {
-        background-color: #0052a3;
+        background-color: #005bb5; 
+    }
+
+    textarea, input, .stTextInput>div>div>input {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        border-radius: 6px !important;
+        border: 1px solid #ccc !important;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
-
 # ------------------------ Functions ------------------------
 def extract_text_from_pdf(uploaded_file):
     doc = fitz.open(stream=uploaded_file.read(), filetype="pdf")
     return "".join([page.get_text() for page in doc])
 
-def extract_skills_from_text(text: str) -> list:
+
+
+def extract_skills_from_text(text: str) -> List[str]:
     if not text.strip():
         st.warning("⚠️ No text found in the uploaded resume. Please upload a valid PDF.")
         return []
 
     prompt = f"""
 You are an AI assistant that extracts detailed skills and requirements from job descriptions.
-
-Your task is to extract **ONLY** a valid JSON array of strings that includes:
-
+Extract a clean JSON array of strings from the job description below.
+Include:
 - Programming languages (e.g., Python, JavaScript)
 - Tools and libraries (e.g., pandas, NumPy, matplotlib)
 - Machine learning frameworks (e.g., TensorFlow, Scikit-learn)
@@ -62,36 +74,30 @@ Your task is to extract **ONLY** a valid JSON array of strings that includes:
 - Soft skills and communication abilities (e.g., conveying technical concepts to non-technical audiences)
 - Any multi-word skills or requirements (e.g., model selection, feature engineering)
 - Specific phrases that refer to experience or qualifications (e.g., developing ML models in production)
-
 Rules:
 - Do not include duplicates
 - No markdown or commentary
 - Normalize common abbreviations (e.g., ML → Machine Learning)
 - "Return only a JSON array of strings. Do not include any explanation, markdown, or text outside the array. Here is the job description: ..."
-
-
 Job Description:
 \"\"\"{text}\"\"\"
 """
-
     try:
         raw_response = ask_llm(prompt)
+        print("🧠 LLM Raw Response:", raw_response)
+        matches = re.findall(r'\[[^\]]+\]', raw_response, re.DOTALL)
+        for match in matches:
+            try:
+                skills_list = json.loads(match)
+                if isinstance(skills_list, list):
+                    # Return cleaned list
+                    return sorted(set(
+                        skill.strip() for skill in skills_list if isinstance(skill, str) and skill.strip()
+                    ))
+            except json.JSONDecodeError:
+                continue
 
-        # Extract only the JSON list using regex
-        match = re.search(r'(\[.*?\])', raw_response, re.DOTALL)
-
-        if not match:
-            raise ValueError("No JSON list found.")
-
-        json_text = match.group(0)
-        skills_list = json.loads(json_text)
-
-        if not isinstance(skills_list, list):
-            raise ValueError("Extracted data is not a list.")
-
-        # Clean list
-        cleaned = sorted(set(skill.strip() for skill in skills_list if isinstance(skill, str) and skill.strip()))
-        return cleaned
+        raise ValueError("No valid JSON list found in the response.")
 
     except Exception as e:
         print(f"Skill extraction failed: {e}")
@@ -122,7 +128,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
+st.markdown("📺 [Watch Tutorial](https://www.youtube.com/watch?v=uBSbgQ1qPHI)", unsafe_allow_html=True)
 token_input = st.text_input(
     "Please enter your Hugging Face token (used only for this session):",
     type="password",
@@ -132,7 +138,7 @@ token_input = st.text_input(
 if token_input:
     os.environ["HUGGINGFACEHUB_API_TOKEN"] = token_input
     st.success("✅ Token has been set for this session.")
-    st.markdown("📺 [Watch Tutorial](https://www.youtube.com/watch?v=uBSbgQ1qPHI)", unsafe_allow_html=True)
+
 else:
     st.info("🔑 Your Hugging Face API token is required for the app to work correctly.")
     st.stop()
@@ -262,8 +268,7 @@ if st.button("Generate Match Score & Cover Letter"):
                     ✅ Final Match Score: {adjusted_score}%
                 </div>
                 """, unsafe_allow_html=True)
-
-                # ---------------- Strengths and Missing Skills ----------------
+# ---------------- Strengths and Missing Skills ----------------
                 col1, col2 = st.columns(2)
                 with col1:
                     st.markdown("### ✅ Strengths")
@@ -285,7 +290,6 @@ if st.button("Generate Match Score & Cover Letter"):
                 st.write("3. Tailor your resume for each job application.")
                 st.write("4. Use the generated cover letter to make a strong impression.")
                 st.write("5. Good luck with your interview 😉")
-
 
                 st.subheader("✉️ Generated Cover Letter")
                 st.code(cover_letter)

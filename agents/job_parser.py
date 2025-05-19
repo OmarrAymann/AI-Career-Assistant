@@ -11,19 +11,26 @@ class JobParserAgent:
 
     def run(self, job_description: str) -> dict:
         prompt = f"""
-You are an expert job analysis assistant. Your task is to extract structured information from a job description. Focus on understanding the *skills*, *experience*, and *tools* required, as well as identifying *important keywords* that describe the role.
+You are a professional job analysis assistant.
 
-Analyze the job description below and return a **well-formatted JSON object** with the following keys:
-- **required_skills**: A list of core technical and non-technical skills explicitly required for the role.
-- **required_experience**: A brief sentence or phrase describing the minimum experience required (e.g., "3+ years in software development").
-- **preferred_tools_or_technologies**: A list of tools, frameworks, or technologies mentioned as preferred or nice-to-have.
-- **keywords**: A list of important role-specific keywords or phrases that summarize the job responsibilities or focus areas.
+Extract structured data from the following job description and return a **valid JSON object** with the fields below.
 
-Only return a valid JSON object. Do not include any explanation, markdown, or extra text.
+Use these formats and examples:
 
+- "required_skills": List of technical and soft skills mentioned.
+  Example: ["data visualization", "problem-solving", "team collaboration", "Python", ....]
+
+- "required_experience": A short phrase like "5+ years in data analysis" or "Bachelor’s degree in Computer Science".
+
+- "preferred_tools_or_technologies": List of tools, software, frameworks, or platforms.
+  Example: ["TensorFlow", "Keras", "Docker", "AWS", ....]
+
+- "keywords": List of important role-specific terms and responsibilities.
+  Example: ["AI model deployment", "data preprocessing", "cloud infrastructure", "real-time analytics", ....]
+
+Return only a valid JSON object without any explanations, markdown, or additional text.
 Job description:
 \"\"\"{job_description}\"\"\"
-
 Return only a valid JSON object with keys:
 - required_skills
 - required_experience
@@ -46,3 +53,4 @@ Make sure to include all relevant information from the job description in the JS
                 if attempt == 1:
                     raise e
                 raw_result = ask_llm("Return only valid JSON:\n" + raw_result)
+

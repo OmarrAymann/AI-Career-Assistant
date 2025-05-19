@@ -1,11 +1,11 @@
-Dear Hiring Manager,
+Dear Hiring Team,
 
-I’m thrilled to express my interest in the sad role.
-My background in problem-solving and hands-on experience with AMG8833 thermal sensor, Arabic (Native), C++ (oop) make me confident in my ability to learn fast and contribute meaningfully.
-While I bring a strong foundation,I’m equally driven by the opportunity to grow.
-I’m especially excited by the chance to work with technologies like Python, C++, Git, JIRA, Agile methodologies, Langchain, TensorFlow, PyTorch, Keras, and I’m confident I can bring value to your team from day one.
+I’m excited to apply for the data scientist opportunity.
+I bring a proven track record in problem-solving, Python, communication skills, NumPy, Pandas, SQL and have consistently delivered results through skills such as AMG8833 thermal sensor, Arabic, C++.
+Your focus on Tableau, Matplotlib aligns perfectly with my enthusiasm for cutting-edge technologies.
+I’m eager to bring my energy, expertise, and adaptability to help achieve your goals.
 
-Thank you for considering my application.
+I would welcome the chance to further discuss how I can support your mission.
 
-Sincerely,
-aas
+Best regards,
+omar ayman
