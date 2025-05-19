@@ -140,7 +140,7 @@ if token_input:
     st.success("✅ Token has been set for this session.")
 
 else:
-    st.info('🔑 **:black[Your Hugging Face API token is required for the app to work correctly.]**')
+    st.markdown('<span style="color:black; font-weight:bold;">🔑 Your Hugging Face API token is required for the app to work correctly.</span>', unsafe_allow_html=True)
     st.stop()
 # ------------------------ Step 1: Resume ------------------------
 st.header("Step 2: Provide Your Skills")
@@ -174,7 +174,7 @@ st.markdown('<label style="color:black; font-weight:bold;">📝 Your Name</label
 user_name = st.text_input(label="", value="")
 
 st.markdown('<label style="color:black; font-weight:bold;">🎯 Job Title</label>', unsafe_allow_html=True)
-position_title = st.text_input(label="", value="")
+position_title = st.text_input(label=" ", value=" ")
 
 #cover_tone = st.selectbox("✍️ Tone of the Cover Letter", ["Professional", "Friendly", "Confident", "Humble"], index=0)
 
