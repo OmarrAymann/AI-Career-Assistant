@@ -149,7 +149,12 @@ else:
     st.stop()
 # ------------------------ Step 1: Resume ------------------------
 st.header("Step 2: Provide Your Skills")
-resume_file = st.file_uploader("📄 Upload your resume (PDF)", type=["pdf"])
+st.markdown(
+    '<label style="color:black; font-weight:bold;">📄 Upload your resume (PDF)</label>',
+    unsafe_allow_html=True
+)
+resume_file = st.file_uploader(label="", type=["pdf"])
+
 manual_skills = st.text_area("Or type your skills (comma-separated)", placeholder="E.g., Python, SQL, Docker, Java,etc...")
 
 user_skills = []
@@ -167,11 +172,24 @@ elif manual_skills:
         pass
         #st.success(f"✅ Entered skills: {', '.join(user_skills)}")
 else:
-    st.info("📌 Tip: You can upload a PDF resume or enter your skills manually.")
+    st.markdown(
+    '<span style="color:black; font-weight:bold;">📌 Tip: You can upload a PDF resume or enter your skills manually.</span>',
+    unsafe_allow_html=True
+)
+
 
 # ------------------------ Step 2: Job Info ------------------------
 st.header("Step 3: Paste the Job Description")
-job_description = st.text_area("📄 Job Description", height=250, placeholder="Paste the full job description here...")
+st.markdown(
+    '<label style="color:black; font-weight:bold;">📄 Job Description</label>',
+    unsafe_allow_html=True
+)
+job_description = st.text_area(
+    label="",
+    height=250,
+    placeholder="Paste the full job description here..."
+)
+
 
 # ------------------------ Step 3: Personal Info ------------------------
 st.header("Step 4: Personal info")
