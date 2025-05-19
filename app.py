@@ -129,11 +129,16 @@ st.markdown(
     unsafe_allow_html=True
 )
 st.markdown("📺 [Watch Tutorial](https://www.youtube.com/watch?v=uBSbgQ1qPHI)", unsafe_allow_html=True)
+st.markdown(
+    '<label style="color:black; font-weight:bold;">🔐 Please enter your Hugging Face token (used only for this session):</label>',
+    unsafe_allow_html=True
+)
 token_input = st.text_input(
-    "Please enter your Hugging Face token (used only for this session):",
+    label="",
     type="password",
     help="You can find your token at https://huggingface.co/settings/tokens"
 )
+
 
 if token_input:
     os.environ["HUGGINGFACEHUB_API_TOKEN"] = token_input
