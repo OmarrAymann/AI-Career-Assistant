@@ -1,4 +1,4 @@
-# 🤖 **AI Career Assistant**  
+# 🤖 **Smart Resume Matcher**  
 
 An AI-powered assistant that helps you apply for jobs faster.  
 Let this be your AI buddy who handles the boring stuff:  
